@@ -12,8 +12,6 @@ Proyek ini dapat dicoba secara langsung melalui link berikut: [Bookshelf App](ht
 
 ## 🖼️ Screenshot Aplikasi
 
-Tambahkan beberapa screenshot penting untuk mempermudah penilaian:
-
 1. **Homepage**:
    ![Home Page](./assets/home.png)
 2. **Daftar Buku**: Menunjukkan daftar buku yang telah diorganisir.

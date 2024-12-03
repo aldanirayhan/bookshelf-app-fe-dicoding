@@ -47,7 +47,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* position: sticky; */
+  position: sticky;
 }
 
 .right-section {
@@ -73,6 +73,7 @@ body {
   flex-direction: column;
   gap: 10px;
   width: 600px;
+  text-transform: uppercase;
 }
 
 .form-section {

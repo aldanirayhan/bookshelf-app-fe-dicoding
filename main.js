@@ -3,9 +3,7 @@ const RENDER_EVENT = 'render-book';
 const SAVED_EVENT = 'saved-books';
 const STORAGE_KEY = 'BOOK_APPSS';
 
-function generatedId() {
-  return +new Date();
-}
+const generatedId = () => +new Date();
 
 function generateBookObject(id, title, author, year, isComplete) {
   return {
@@ -17,24 +15,9 @@ function generateBookObject(id, title, author, year, isComplete) {
   };
 }
 
-function findBook(bookId) {
-  for (const bookItem of books) {
-    if (bookItem.id === bookId) {
-      return bookItem;
-    }
-  }
-  return null;
-}
+const findBook = (bookId) => books.find((book) => book.id === bookId) || null;
 
-function findBookIndex(bookId) {
-  for (const index in books) {
-    if (books[index].id === bookId) {
-      return index;
-    }
-  }
-
-  return -1;
-}
+const findBookIndex = (bookId) => books.findIndex((book) => book.id === bookId);
 
 function isStorageExist() {
   if (typeof Storage === undefined) {
@@ -52,18 +35,12 @@ function saveData() {
   }
 }
 
-function loadDataFromStorage() {
+const loadDataFromStorage = () => {
   const serializedData = localStorage.getItem(STORAGE_KEY);
-  let data = JSON.parse(serializedData);
-
-  if (data !== null) {
-    for (const book of data) {
-      books.push(book);
-    }
-  }
-
+  const data = serializedData ? JSON.parse(serializedData) : [];
+  books.push(...data);
   document.dispatchEvent(new Event(RENDER_EVENT));
-}
+};
 
 let editBookId = null;
 function addBook() {

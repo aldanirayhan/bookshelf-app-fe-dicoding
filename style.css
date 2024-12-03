@@ -75,6 +75,10 @@ body {
   width: 600px;
 }
 
+.form-section {
+  border-bottom: 2px solid var(--secondary-black);
+}
+
 .form-group {
   margin-bottom: 15px;
 }
@@ -131,6 +135,7 @@ label {
   text-transform: uppercase;
   font-size: 1.5rem;
   padding-bottom: 10px;
+  border-bottom: 2px solid var(--secondary-black);
 }
 
 .book-list-section {
@@ -144,12 +149,11 @@ label {
 .book-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 30px;
+  gap: 20px;
   width: 100%;
   margin-left: 10px;
   margin-bottom: 10px;
   padding-bottom: 20px;
-  border-bottom: 2px solid var(--secondary-black);
 }
 
 .book-item {

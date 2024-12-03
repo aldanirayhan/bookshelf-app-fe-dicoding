@@ -1,0 +1,230 @@
+:root {
+  --primary-yellow: #ffd60a;
+  --secondary-black: #1a1a1a;
+  --white: #ffffff;
+  --border-radius: 8px;
+  --shadow: 8px 8px 0px var(--secondary-black);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--primary-yellow);
+  color: var(--secondary-black);
+  line-height: 1.6;
+}
+
+.header {
+  background-color: var(--secondary-black);
+  color: var(--primary-yellow);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 20px 20px;
+  position: relative;
+  gap: 20px;
+}
+
+.left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.right-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: var(--secondary-black);
+  text-transform: uppercase;
+}
+
+.form {
+  background-color: var(--white);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 600px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--secondary-black);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.form button {
+  background-color: var(--secondary-black);
+  color: var(--primary-yellow);
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.form button:hover {
+  transform: translateY(-2px);
+}
+
+input[type='checkbox'] {
+  accent-color: var(--secondary-black); /* Warna centang */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+label {
+  font-size: 1rem;
+  color: var(--secondary-black);
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak antara teks dan checkbox */
+}
+
+.search-section,
+.book-list-section {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  padding-bottom: 10px;
+}
+
+.book-list-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  width: 100%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.book-item {
+  background-color: var(--white);
+  border: 3px solid var(--secondary-black);
+  border-radius: 8px;
+  padding: 20px 15px;
+  box-shadow: -8px 8px 0 var(--secondary-black), 0 5px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  height: 300px;
+  width: 225px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  justify-content: space-between;
+  position: relative;
+  font-size: small;
+}
+
+.book-item span {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 140px;
+  left: 10px;
+  right: 10px;
+}
+
+.book-item:hover {
+  transform: translateY(-5px);
+  box-shadow: -12px 12px 0 var(--secondary-black), 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.book-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+
+.book-actions button {
+  flex: 1;
+  background-color: var(--primary-yellow);
+  color: var(--secondary-black);
+  border: 2px solid var(--secondary-black);
+  padding: 10px;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.book-actions button:nth-child(2) {
+  background-color: var(--secondary-black);
+  color: var(--primary-yellow);
+  border: 2px solid var(--primary-yellow);
+}
+
+.book-actions button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .left-section {
+    position: static;
+  }
+}

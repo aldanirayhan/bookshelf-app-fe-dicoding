@@ -1,6 +1,6 @@
 const books = [];
 const RENDER_EVENT = 'render-book';
-const SAVED_EVENT = 'saved-todos';
+const SAVED_EVENT = 'saved-books';
 const STORAGE_KEY = 'BOOK_APPSS';
 
 function generatedId() {
@@ -99,9 +99,7 @@ function createBookElement(bookObject) {
     : 'Selesai dibaca';
 
   toggleButton.addEventListener('click', function () {
-    bookObject.isCompleted = !bookObject.isCompleted;
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
+    taskBookReadComplete(bookObject.id);
   });
 
   const deleteButton = document.createElement('button');
@@ -109,46 +107,54 @@ function createBookElement(bookObject) {
   deleteButton.innerText = 'Hapus Buku';
 
   deleteButton.addEventListener('click', () => {
-    const bookIndex = books.findIndex((item) => item.id === bookObject.id);
-    if (bookIndex !== -1) {
-      books.splice(bookIndex, 1);
-      document.dispatchEvent(new Event(RENDER_EVENT));
-      saveData();
-    }
+    deleteBookById(bookObject.id);
   });
 
   const editButton = document.createElement('button');
   editButton.setAttribute('data-testid', 'bookItemEditButton');
   editButton.innerText = 'Edit Buku';
 
-  editButton.addEventListener('click', function () {
-    const bookFormTitle = document.getElementById('bookFormTitle');
-    const bookFormAuthor = document.getElementById('bookFormAuthor');
-    const bookFormYear = document.getElementById('bookFormYear');
-    const bookFormIsComplete = document.getElementById('bookFormIsComplete');
-    const bookFormHeading = document.querySelector('.section-title');
-
-    bookFormTitle.value = bookObject.title;
-    bookFormAuthor.value = bookObject.author;
-    bookFormYear.value = bookObject.year;
-    bookFormIsComplete.checked = bookObject.isCompleted;
-
-    bookFormHeading.innerText = 'Edit Buku';
-
-    const submitBookForm = document.getElementById('bookForm');
-    submitBookForm.onsubmit = (event) => {
-      event.preventDefault();
-      const bookIndex = books.findIndex((item) => item.id === bookObject.id);
-      if (bookIndex !== -1) {
-        books.splice(bookIndex, 1);
-      }
-      addBook();
-      bookFormHeading.innerText = 'Tambah Buku Baru';
-    };
-  });
-
   actionContainer.append(toggleButton, deleteButton, editButton);
   bookContainer.append(bookTtile, bookDetails, actionContainer);
+
+  function findBook(bookId) {
+    for (const bookItem of books) {
+      if (bookItem.id === bookId) {
+        return bookItem;
+      }
+    }
+    return null;
+  }
+
+  function taskBookReadComplete(bookId) {
+    const bookTarget = findBook(bookId);
+
+    if (bookTarget == null) return;
+
+    bookTarget.isCompleted = !bookTarget.isCompleted;
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+  }
+
+  function findBookIndex(bookId) {
+    for (const index in bookId) {
+      if (bookId[index].id === todoId) {
+        return index;
+      }
+    }
+
+    return -1;
+  }
+
+  function deleteBookById(bookId) {
+    const bookIndex = findBookIndex(bookId);
+
+    if (bookIndex !== -1) return;
+
+    books.splice(bookIndex, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+  }
 
   return bookContainer;
 }

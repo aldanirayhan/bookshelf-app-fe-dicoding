@@ -6,6 +6,21 @@ Selamat datang di **Bookshelf App**! Ini adalah proyek submission dari kelas **F
 
 Bookshelf App adalah aplikasi sederhana yang memungkinkan pengguna untuk menambah, mencari, dan mengelola daftar buku yang sedang dibaca maupun yang sudah selesai dibaca. Proyek ini didesain sebagai latihan pengembangan front-end menggunakan **HTML**, **CSS**, dan **JavaScript**.
 
+## 🌐 Live Demo
+
+Proyek ini dapat dicoba secara langsung melalui link berikut: [Bookshelf App](https://bookshelf-app-aldani.vercel.app/)
+
+## 🖼️ Screenshot Aplikasi
+
+Tambahkan beberapa screenshot penting untuk mempermudah penilaian:
+
+1. **Homepage**:
+   ![Home Page](./assets/home.png)
+2. **Daftar Buku**: Menunjukkan daftar buku yang telah diorganisir.
+   ![Home Page](./assets/added-book.png)
+3. **Fitur Edit & Hapus**: Ilustrasi penggunaan fitur pengelolaan buku.
+   ![Home Page](./assets/edit-book.png)
+
 ## ⚙️ Fitur Utama
 
 - **Tambah Buku Baru**: Pengguna dapat menambahkan buku dengan detail judul, penulis, tahun, dan status (selesai/belum selesai dibaca).
@@ -25,23 +40,6 @@ Bookshelf App adalah aplikasi sederhana yang memungkinkan pengguna untuk menamba
    - Isi form untuk menambahkan buku baru.
    - Gunakan fitur pencarian untuk menemukan buku berdasarkan judul.
    - Kelola buku dengan fitur edit dan hapus.
-
-## 🖼️ Screenshot Aplikasi
-
-Tambahkan beberapa screenshot penting untuk mempermudah penilaian:
-
-1. **Homepage**:
-   ![Home Page](./assets/home.png)
-2. **Daftar Buku**: Menunjukkan daftar buku yang telah diorganisir.
-   ![Home Page](./assets/added-book.png)
-3. **Fitur Edit & Hapus**: Ilustrasi penggunaan fitur pengelolaan buku.
-   ![Home Page](./assets/edit-book.png)
-
-## 🌐 Live Demo
-
-Proyek ini dapat dicoba secara langsung melalui link berikut: [Bookshelf App](https://your-vercel-deploy-url.vercel.app)
-
-> Ganti `your-vercel-deploy-url` dengan link setelah Anda deploy proyek ini ke Vercel.
 
 ## 📂 Struktur Proyek
 

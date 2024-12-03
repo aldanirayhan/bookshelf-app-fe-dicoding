@@ -7,13 +7,13 @@ function generatedId() {
   return +new Date();
 }
 
-function generatebookObject(id, title, author, year, isCompleted) {
+function generateBookObject(id, title, author, number, isComplete) {
   return {
     id,
     title,
     author,
-    year,
-    isCompleted,
+    number: parseInt(number),
+    isComplete,
   };
 }
 
@@ -75,7 +75,7 @@ function addBook() {
   if (editBookId) {
     const bookIndex = findBookIndex(editBookId);
     if (bookIndex !== -1) {
-      books[bookIndex] = generatebookObject(
+      books[bookIndex] = generateBookObject(
         editBookId,
         titleBook,
         authorBook,
@@ -88,7 +88,7 @@ function addBook() {
     }
   } else {
     const generatedID = generatedId();
-    const bookObject = generatebookObject(
+    const bookObject = generateBookObject(
       generatedID,
       titleBook,
       authorBook,
@@ -108,9 +108,9 @@ function editBookByid(bookId) {
   if (bookToEdit) {
     document.getElementById('bookFormTitle').value = bookToEdit.title;
     document.getElementById('bookFormAuthor').value = bookToEdit.author;
-    document.getElementById('bookFormYear').value = bookToEdit.year;
+    document.getElementById('bookFormYear').value = bookToEdit.number;
     document.getElementById('bookFormIsComplete').checked =
-      bookToEdit.isCompleted;
+      bookToEdit.isComplete;
 
     editBookId = bookId;
   }
@@ -132,7 +132,7 @@ function createBookElement(bookObject) {
 
   const bookYear = document.createElement('p');
   bookYear.setAttribute('data-testid', 'bookItemYear');
-  bookYear.innerText = `Tahun: ${bookObject.year}`;
+  bookYear.innerText = `Tahun: ${bookObject.number}`;
 
   const bookDetails = document.createElement('span');
   bookDetails.append(bookAuthor, bookYear);
@@ -142,7 +142,7 @@ function createBookElement(bookObject) {
 
   const toggleButton = document.createElement('button');
   toggleButton.setAttribute('data-testid', 'bookItemIsCompleteButton');
-  toggleButton.innerText = bookObject.isCompleted
+  toggleButton.innerText = bookObject.isComplete
     ? 'Belum selesai dibaca'
     : 'Selesai dibaca';
 
@@ -177,7 +177,7 @@ function createBookElement(bookObject) {
 
     if (bookTarget == null) return;
 
-    bookTarget.isCompleted = !bookTarget.isCompleted;
+    bookTarget.isComplete = !bookTarget.isComplete;
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
   }
@@ -206,7 +206,7 @@ document.addEventListener(RENDER_EVENT, function () {
   for (const book of books) {
     const bookElement = createBookElement(book);
 
-    if (book.isCompleted) {
+    if (book.isComplete) {
       completedBookList.append(bookElement);
     } else {
       incompleteBookList.append(bookElement);
@@ -242,7 +242,7 @@ document
     for (const book of books) {
       if (book.title.toLowerCase().includes(searchInput)) {
         const bookElement = createBookElement(book);
-        if (book.isCompleted) {
+        if (book.isComplete) {
           completedBookList.append(bookElement);
         } else {
           incompleteBookList.append(bookElement);

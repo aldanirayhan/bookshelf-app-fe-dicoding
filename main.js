@@ -109,7 +109,7 @@ function createBookElement(bookObject) {
   deleteButton.innerText = 'Hapus Buku';
 
   deleteButton.addEventListener('click', () => {
-    const bookIndex = books.findIndex((item) => item.id === book.id);
+    const bookIndex = books.findIndex((item) => item.id === bookObject.id);
     if (bookIndex !== -1) {
       books.splice(bookIndex, 1);
       document.dispatchEvent(new Event(RENDER_EVENT));

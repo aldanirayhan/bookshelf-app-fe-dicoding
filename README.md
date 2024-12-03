@@ -32,7 +32,7 @@ Tambahkan beberapa screenshot penting untuk mempermudah penilaian:
 
 1. **Clone Repo**: Unduh proyek ini ke komputer Anda.
    ```bash
-   git clone https://github.com/username/repo-name.git
+   git clone https://github.com/aldanirayhan/bookshelf-app-fe-dicoding.git
    ```
 2. **Buka di Browser**: Jalankan file `index.html` di browser favorit Anda.
 

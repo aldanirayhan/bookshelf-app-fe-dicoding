@@ -94,82 +94,72 @@ function editBookByid(bookId) {
 }
 
 function createBookElement(bookObject) {
-  const bookContainer = document.createElement('div');
-  bookContainer.classList.add('book-item');
-  bookContainer.setAttribute('data-bookid', bookObject.id);
-  bookContainer.setAttribute('data-testid', 'bookItem');
+  const { id, title, author, year, isComplete } = bookObject;
 
-  const bookTtile = document.createElement('h3');
-  bookTtile.setAttribute('data-testid', 'bookItemTitle');
-  bookTtile.innerText = bookObject.title;
+  const bookHTML = `
+    <div class="book-item" data-testid="bookItem" data-bookid="${id}">
+      <h3 data-testid="bookItemTitle">${title}</h3>
+      <p data-testid="bookItemAuthor">Penulis: ${author}</p>
+      <p data-testid="bookItemYear">Tahun: ${year}</p>
+      <div class="book-actions">
+        <button data-testid="bookItemIsCompleteButton">
+          ${isComplete ? 'Belum selesai dibaca' : 'Selesai dibaca'}
+        </button>
+        <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+        <button data-testid="bookItemEditButton">Edit Buku</button>
+      </div>
+    </div>
+  `;
 
-  const bookAuthor = document.createElement('p');
-  bookAuthor.setAttribute('data-testid', 'bookItemAuthor');
-  bookAuthor.innerText = `Penulis: ${bookObject.author}`;
+  const bookElement = document.createElement('div');
+  bookElement.innerHTML = bookHTML.trim();
+  const container = bookElement.firstChild;
 
-  const bookYear = document.createElement('p');
-  bookYear.setAttribute('data-testid', 'bookItemYear');
-  bookYear.innerText = `Tahun: ${bookObject.year}`;
-
-  const bookDetails = document.createElement('span');
-  bookDetails.append(bookAuthor, bookYear);
-
-  const actionContainer = document.createElement('div');
-  actionContainer.classList.add('book-actions');
-
-  const toggleButton = document.createElement('button');
-  toggleButton.setAttribute('data-testid', 'bookItemIsCompleteButton');
-  toggleButton.innerText = bookObject.isComplete
-    ? 'Belum selesai dibaca'
-    : 'Selesai dibaca';
-
-  toggleButton.addEventListener('click', function () {
-    taskBookReadComplete(bookObject.id);
+  const toggleButton = container.querySelector(
+    '[data-testid="bookItemIsCompleteButton"]'
+  );
+  toggleButton.addEventListener('click', () => {
+    taskBookReadComplete(id);
   });
 
-  const deleteButton = document.createElement('button');
-  deleteButton.setAttribute('data-testid', 'bookItemDeleteButton');
-  deleteButton.innerText = 'Hapus Buku';
-
+  const deleteButton = container.querySelector(
+    '[data-testid="bookItemDeleteButton"]'
+  );
   deleteButton.addEventListener('click', () => {
-    deleteBookById(bookObject.id);
+    deleteBookById(id);
   });
 
-  const editButton = document.createElement('button');
-  editButton.setAttribute('data-testid', 'bookItemEditButton');
-  editButton.innerText = 'Edit Buku';
-
+  const editButton = container.querySelector(
+    '[data-testid="bookItemEditButton"]'
+  );
   editButton.addEventListener('click', () => {
     document.getElementById('section-title').innerText = 'Edit Buku';
     document.getElementById('bookFormSubmit').innerText =
       'Simpan Perubahan Buku';
-    editBookByid(bookObject.id);
+    editBookByid(id);
   });
 
-  actionContainer.append(toggleButton, deleteButton, editButton);
-  bookContainer.append(bookTtile, bookDetails, actionContainer);
+  return container;
+}
 
-  function taskBookReadComplete(bookId) {
-    const bookTarget = findBook(bookId);
+function taskBookReadComplete(bookId) {
+  const bookTarget = findBook(bookId);
 
-    if (bookTarget == null) return;
+  if (!bookTarget) return;
 
-    bookTarget.isComplete = !bookTarget.isComplete;
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
-  }
+  bookTarget.isComplete = !bookTarget.isComplete;
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+}
 
-  function deleteBookById(bookId) {
-    const bookIndex = findBookIndex(bookId);
+function deleteBookById(bookId) {
+  const bookIndex = findBookIndex(bookId);
 
-    if (bookIndex === -1) return;
+  if (bookIndex === -1) return;
 
-    books.splice(bookIndex, 1);
-    document.dispatchEvent(new Event(RENDER_EVENT));
-    saveData();
-  }
-
-  return bookContainer;
+  books.splice(bookIndex, 1);
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
 }
 
 document.addEventListener(RENDER_EVENT, function () {

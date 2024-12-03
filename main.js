@@ -7,12 +7,12 @@ function generatedId() {
   return +new Date();
 }
 
-function generateBookObject(id, title, author, number, isComplete) {
+function generateBookObject(id, title, author, year, isComplete) {
   return {
     id,
     title,
     author,
-    number: parseInt(number),
+    year: parseInt(year),
     isComplete,
   };
 }
@@ -108,7 +108,7 @@ function editBookByid(bookId) {
   if (bookToEdit) {
     document.getElementById('bookFormTitle').value = bookToEdit.title;
     document.getElementById('bookFormAuthor').value = bookToEdit.author;
-    document.getElementById('bookFormYear').value = bookToEdit.number;
+    document.getElementById('bookFormYear').value = bookToEdit.year;
     document.getElementById('bookFormIsComplete').checked =
       bookToEdit.isComplete;
 
@@ -132,7 +132,7 @@ function createBookElement(bookObject) {
 
   const bookYear = document.createElement('p');
   bookYear.setAttribute('data-testid', 'bookItemYear');
-  bookYear.innerText = `Tahun: ${bookObject.number}`;
+  bookYear.innerText = `Tahun: ${bookObject.year}`;
 
   const bookDetails = document.createElement('span');
   bookDetails.append(bookAuthor, bookYear);

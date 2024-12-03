@@ -117,7 +117,37 @@ function createBookElement(bookObject) {
     }
   });
 
-  actionContainer.append(toggleButton, deleteButton);
+  const editButton = document.createElement('button');
+  editButton.setAttribute('data-testid', 'bookItemEditButton');
+  editButton.innerText = 'Edit Buku';
+
+  editButton.addEventListener('click', function () {
+    const bookFormTitle = document.getElementById('bookFormTitle');
+    const bookFormAuthor = document.getElementById('bookFormAuthor');
+    const bookFormYear = document.getElementById('bookFormYear');
+    const bookFormIsComplete = document.getElementById('bookFormIsComplete');
+    const bookFormHeading = document.querySelector('.section-title');
+
+    bookFormTitle.value = bookObject.title;
+    bookFormAuthor.value = bookObject.author;
+    bookFormYear.value = bookObject.year;
+    bookFormIsComplete.checked = bookObject.isCompleted;
+
+    bookFormHeading.innerText = 'Edit Buku';
+
+    const submitBookForm = document.getElementById('bookForm');
+    submitBookForm.onsubmit = (event) => {
+      event.preventDefault();
+      const bookIndex = books.findIndex((item) => item.id === bookObject.id);
+      if (bookIndex !== -1) {
+        books.splice(bookIndex, 1);
+      }
+      addBook();
+      bookFormHeading.innerText = 'Tambah Buku Baru';
+    };
+  });
+
+  actionContainer.append(toggleButton, deleteButton, editButton);
   bookContainer.append(bookTtile, bookDetails, actionContainer);
 
   return bookContainer;
@@ -153,3 +183,28 @@ document.addEventListener('DOMContentLoaded', () => {
     loadDataFromStorage();
   }
 });
+
+document
+  .getElementById('searchBook')
+  .addEventListener('submit', function (event) {
+    event.preventDefault();
+    const searchInput = document
+      .getElementById('searchBookTitle')
+      .value.toLowerCase();
+    const incompleteBookList = document.getElementById('incompleteBookList');
+    const completedBookList = document.getElementById('completeBookList');
+
+    incompleteBookList.innerHTML = '';
+    completedBookList.innerHTML = '';
+
+    for (const book of books) {
+      if (book.title.toLowerCase().includes(searchInput)) {
+        const bookElement = createBookElement(book);
+        if (book.isCompleted) {
+          completedBookList.append(bookElement);
+        } else {
+          incompleteBookList.append(bookElement);
+        }
+      }
+    }
+  });
